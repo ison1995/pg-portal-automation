@@ -14,7 +14,7 @@ global browser
 browser = webdriver.Chrome()
 
 
-class EpisodePortalAutomation(unittest.TestCase):
+class DevChecklist(unittest.TestCase):
 
 	def setUp(self):
 		# Setup instead of using init since we are using unittest
@@ -178,14 +178,30 @@ class EpisodePortalAutomation(unittest.TestCase):
 		display_name = browser.find_element_by_xpath(display_name_selector)
 		self.assertIsNotNone(display_name)
 
-		# Grab the current URL and return the URL as "char_url"
-		char_url = browser.current_url
-		return char_url
 
+	def customizeCharacter(self, story_id_url, character_name, body, body_color, brow, brow_color, hair, hair_color, 
+							eyes, eyes_color, face, nose, lips, lips_color):
+		# Go to Story Page
+		browser.get(story_id_url)
 
-	def customizeCharacter(self, character_url, body, brow, hair, eyes, face, nose, lips):
-		# Redirect to story home page
-		browser.get(character_url)
+		# Press the Characters button
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.LINK_TEXT, "Characters")))
+		button_characters = browser.find_element_by_link_text("Characters")
+		button_characters.click()
+
+		# Choose which Character to customize
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.LINK_TEXT, character_name)))
+		button_character_toCustomize = browser.find_element_by_link_text(character_name)
+		button_character_toCustomize.click()
+
+		# Customize Character
+		# Select Body
+		body_xpath_selector = "//p[text()='" + body + "']"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, body_xpath_selector)))
+		button_body_toChoose = browser.find_element_by_xpath(body_xpath_selector)
+		button_body_toChoose.click()
+
+		# Customize 
 
 
 
