@@ -4,7 +4,6 @@ from library.portal_selenium_library import DevChecklist
 
 # Setup
 test_run = DevChecklist()
-STORY = "https://pg-story-dev.appspot.com/write/story/dev_bK"
 #test_run.urlSetup()
 
 # Sign In
@@ -18,11 +17,14 @@ STORY = "https://pg-story-dev.appspot.com/write/story/dev_bK"
 #test_run.test_characterCreate(STORY, "CHARLIE", "MALE", False)
 #test_run.test_characterCreate(STORY, "RENEE", "FEMALEPLUS", False)
 
+# Setup (TEST)
+STORY = "https://pg-story-dev.appspot.com/write/story/dev_bK"
+
 # Sign In (TEST)
 test_run.urlSetup()
 test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
 test_run.portalSignIn(test_run.url)
 
-# Story Customization
+# Story Customization (TEST)
 test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "Ash01", "Arched Short", "greenMint", 
-	"TESTHAIR", "HAIRCOLOR", "TESTEYES", "EYESCOLOR", "TESTFACE", "TESTNOSE", "TESTLIPS", "LIPSCOLOR")
+	"Beach Wave Hair", "BluePastel", "Deepset Downturned", "violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", "pinkDeepGloss")

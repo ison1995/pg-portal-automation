@@ -220,6 +220,11 @@ class DevChecklist(unittest.TestCase):
 		# Customize
 		customizeCharacterHelper("Body", body, body_color, True)
 		customizeCharacterHelper("Brow", brow, brow_color, True)
+		customizeCharacterHelper("Hair", hair, hair_color, True)
+		customizeCharacterHelper("Eyes", eyes, eyes_color, True)
+		customizeCharacterHelper("Face", face, "", False)
+		customizeCharacterHelper("Nose", nose, "", False)
+		customizeCharacterHelper("Lips", lips, lips_color, True)
 
 	#def outfitCreate(character_name, body_type, outfit_name):
 	# Click Outfit Button on Story Page
