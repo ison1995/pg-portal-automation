@@ -24,6 +24,5 @@ test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
 test_run.portalSignIn(test_run.url)
 
 # Story Customization
-test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "BODYCOLOR", "TESTBROW", "BROWCOLOR", 
+test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "Ash01", "Arched Short", "greenMint", 
 	"TESTHAIR", "HAIRCOLOR", "TESTEYES", "EYESCOLOR", "TESTFACE", "TESTNOSE", "TESTLIPS", "LIPSCOLOR")
-

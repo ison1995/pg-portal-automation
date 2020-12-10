@@ -178,7 +178,6 @@ class DevChecklist(unittest.TestCase):
 		display_name = browser.find_element_by_xpath(display_name_selector)
 		self.assertIsNotNone(display_name)
 
-
 	def customizeCharacter(self, story_id_url, character_name, body, body_color, brow, brow_color, hair, hair_color, 
 							eyes, eyes_color, face, nose, lips, lips_color):
 		# Go to Story Page
@@ -194,18 +193,33 @@ class DevChecklist(unittest.TestCase):
 		button_character_toCustomize = browser.find_element_by_link_text(character_name)
 		button_character_toCustomize.click()
 
-		# Customize Character
-		# Select Body
-		body_xpath_selector = "//p[text()='" + body + "']"
-		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, body_xpath_selector)))
-		button_body_toChoose = browser.find_element_by_xpath(body_xpath_selector)
-		button_body_toChoose.click()
+		# Define Customize Helper Function
+		def customizeCharacterHelper(part_toCustomize, part_toSelect, color_toSelect, color_flag):
+			# Select Which Object to Customize
+			button_toCustomize_xpath_selector = "//*[contains(text(), '" + part_toCustomize + "')]"
+			WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, button_toCustomize_xpath_selector)))
+			button_toCustomize = browser.find_element_by_xpath(button_toCustomize_xpath_selector)
+			button_toCustomize.click()
 
-		# Customize 
+			# Choose Customizable Object
+			part_xpath_selector = "//p[text()='" + part_toSelect + "']"
+			button_part_toChoose = browser.find_element_by_xpath(part_xpath_selector)
+			button_part_toChoose.click()
 
+			# Choose Color
+			if color_flag == True:
+				body_color_id = "color-cell-" + color_toSelect
+				button_bodyColor_toChoose = browser.find_element_by_id(body_color_id)
+				button_bodyColor_toChoose.click()
 
+			# Save Changes and Wait for save to finish
+			save_changes_button = browser.find_element_by_id("save-button")
+			save_changes_button.click()
+			WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "save-button")))
 
-
+		# Customize
+		customizeCharacterHelper("Body", body, body_color, True)
+		customizeCharacterHelper("Brow", brow, brow_color, True)
 
 	#def outfitCreate(character_name, body_type, outfit_name):
 	# Click Outfit Button on Story Page
