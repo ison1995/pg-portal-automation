@@ -26,5 +26,9 @@ test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
 test_run.portalSignIn(test_run.url)
 
 # Story Customization (TEST)
-test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "Ash01", "Arched Short", "greenMint", 
-	"Beach Wave Hair", "BluePastel", "Deepset Downturned", "violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", "pinkDeepGloss")
+#test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "Ash01", "Arched Short", "greenMint", 
+#	"Beach Wave Hair", "BluePastel", "Deepset Downturned", "violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", "pinkDeepGloss")
+
+# Outfit Customization (TEST)
+test_run.removeFromExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
+#test_run.addToExistingOutfit(STORY, "Female_default", "Rippedleggingssimple Grey Black")

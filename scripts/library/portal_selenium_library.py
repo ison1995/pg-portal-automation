@@ -226,18 +226,55 @@ class DevChecklist(unittest.TestCase):
 		customizeCharacterHelper("Nose", nose, "", False)
 		customizeCharacterHelper("Lips", lips, lips_color, True)
 
-	#def outfitCreate(character_name, body_type, outfit_name):
-	# Click Outfit Button on Story Page
-	#	WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='outfit-button']")))
-	#	button_outfits = browser.find_element_by_id("outfit-button")
-	#	button_outfits.click()
+	def removeFromExistingOutfit(self, story_id_url, outfit_name, asset_toRemove):
+		# Go to Story Page
+		browser.get(story_id_url)
 
-		# Search for Character's Default Outfit
-	#	WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@class='asset-left-panel-search-bar'")))
-	#	outfit_search_input = find_element_by_class_name("asset-left-panel-search-bar")
-	#	outfit_search_input.click()
+		# Click Outfit Button on Story Page
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='outfit-button']")))
+		button_outfits = browser.find_element_by_id("outfit-button")
+		button_outfits.click()
 
-	#def customizeOutfit():
+		# Find Outfit and Click
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfits-list")))
+		outfit_toCustomize_button = browser.find_element_by_link_text(outfit_name)
+		outfit_toCustomize_button.click()
+
+		# Find Asset and Remove 
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfits-list")))
+		asset_toRemove_xpath_locater = "//div[contains(text(), '"+asset_toRemove+"')]/../img"
+		asset_toRemove_button = browser.find_element_by_xpath(asset_toRemove_xpath_locater)
+		asset_toRemove_button.click()
+
+		# Save Outfit
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-save-button")))
+		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
+		outfit_saveButton.click()
+
+	def addToExistingOutfit(self, story_id_irl, outfit_name, asset_toAdd):
+		# Go to Story Page
+		browser.get(story_id_url)
+
+		# Click Outfit Button on Story Page
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='outfit-button']")))
+		button_outfits = browser.find_element_by_id("outfit-button")
+		button_outfits.click()
+
+		# Find Outfit and Click
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfits-list")))
+		outfit_toCustomize_button = browser.find_element_by_link_text(outfit_name)
+		outfit_toCustomize_button.click()
+
+		# TODO: Find Asset and Add
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfits-list")))
+
+		# Save Outfit
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-save-button")))
+		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
+		outfit_saveButton.click()
+
+
+	#def createNewOutfit():
 
 	#def createEpisode(text):
 
