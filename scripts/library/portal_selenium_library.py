@@ -251,7 +251,7 @@ class DevChecklist(unittest.TestCase):
 		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
 		outfit_saveButton.click()
 
-	def addToExistingOutfit(self, story_id_irl, outfit_name, asset_toAdd):
+	def addToExistingOutfit(self, story_id_url, outfit_name, asset_toAdd):
 		# Go to Story Page
 		browser.get(story_id_url)
 
@@ -265,15 +265,24 @@ class DevChecklist(unittest.TestCase):
 		outfit_toCustomize_button = browser.find_element_by_link_text(outfit_name)
 		outfit_toCustomize_button.click()
 
-		# TODO: Find Asset and Add
-		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfits-list")))
+		# Search Asset
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-search-box")))
+		outfit_searchbox_xpath = "//*[@id='outfit-search-box']/input"
+		outfit_searchbox = browser.find_element_by_xpath(outfit_searchbox_xpath)
+		outfit_searchbox.send_keys(asset_toAdd)
+		
+		# Hover and Click Asset
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "btn-toolbar")))
+		outfit_before_hover = browser.find_element_by_xpath("//div[contains(text(), '"+asset_toAdd+"')]")
+		ActionChains(browser).move_to_element(outfit_before_hover).perform()
+		outfit_toAdd = browser.find_element_by_class_name("overlay-image")
+		outfit_toAdd.click()
 
 		# Save Outfit
 		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-save-button")))
 		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
 		outfit_saveButton.click()
-
-
+		
 	#def createNewOutfit():
 
 	#def createEpisode(text):

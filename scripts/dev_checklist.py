@@ -30,5 +30,5 @@ test_run.portalSignIn(test_run.url)
 #	"Beach Wave Hair", "BluePastel", "Deepset Downturned", "violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", "pinkDeepGloss")
 
 # Outfit Customization (TEST)
-test_run.removeFromExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
-#test_run.addToExistingOutfit(STORY, "Female_default", "Rippedleggingssimple Grey Black")
+#test_run.removeFromExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
+test_run.addToExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
