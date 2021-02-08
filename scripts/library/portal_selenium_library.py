@@ -283,9 +283,69 @@ class DevChecklist(unittest.TestCase):
 		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
 		outfit_saveButton.click()
 		
-	#def createNewOutfit():
+	def createNewOutfit(self, story_id_url, outfit_name, body_type, asset_toAdd):
+		# Go to Story Page
+		browser.get(story_id_url)
 
-	#def createEpisode(text):
+		# Click Outfit Button on Story Page
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='outfit-button']")))
+		button_outfits = browser.find_element_by_id("outfit-button")
+		button_outfits.click()	
+
+		# Create New Outfit
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "new-outfit-button")))
+		new_outfit_button = browser.find_element_by_id("new-outfit-button")
+		new_outfit_button.click()
+
+		# Name Outfit
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "col-sm-9")))
+		outfit_name_input_locater = "input[id='displayName']"
+		outfit_name_input = browser.find_element_by_css_selector(outfit_name_input_locater)
+		outfit_name_input.send_keys(outfit_name)
+
+		# Choose Body Type from Dropdown
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.ID, "categorized-body-type-dropdown")))
+		body_type_dropdown = browser.find_element_by_id("categorized-body-type-dropdown")
+		body_type_dropdown.click()
+		body_type_toClick_xpath_locater = "//a[contains(text(), '"+body_type+"')]"
+		body_type_toClick = browser.find_element_by_xpath(body_type_toClick_xpath_locater)
+		body_type_toClick.click()
+
+		# Search Initial Outfit
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-search-box")))
+		outfit_searchbox_xpath = "//*[@id='outfit-search-box']/input"
+		outfit_searchbox = browser.find_element_by_xpath(outfit_searchbox_xpath)
+		outfit_searchbox.send_keys(asset_toAdd)
+		
+		# Hover and Click Asset
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "btn-toolbar")))
+		outfit_before_hover = browser.find_element_by_xpath("//div[contains(text(), '"+asset_toAdd+"')]")
+		ActionChains(browser).move_to_element(outfit_before_hover).perform()
+		outfit_toAdd = browser.find_element_by_class_name("overlay-image")
+		outfit_toAdd.click()		
+
+		# Save Outfit
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-save-button")))
+		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
+		outfit_saveButton.click()
+
+	def createEpisode(self, story_id_url, text_filename):
+		# Go to Story Page
+		browser.get(story_id_url)
+
+		# TODO: Create a new Episode 
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "episode-button")))
+		new_episodeButton = browser.find_element_by_id("episode-button")
+		new_episodeButton.click()
+
+		# TODO: Copy and Paste the contents of the text file into the Story Editor
+		with open('episode_sample_text.txt') as file:
+    		data = file.read().replace('\n', '')
+
+    	print data
+
+		# TODO: Save Episode
+		
 
 	#def shareGmail():
 

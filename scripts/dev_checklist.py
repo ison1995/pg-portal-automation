@@ -17,6 +17,11 @@ test_run = DevChecklist()
 #test_run.test_characterCreate(STORY, "CHARLIE", "MALE", False)
 #test_run.test_characterCreate(STORY, "RENEE", "FEMALEPLUS", False)
 
+
+# ----------------------------------#
+#	TESTING PURPOSES
+# ----------------------------------# 
+
 # Setup (TEST)
 STORY = "https://pg-story-dev.appspot.com/write/story/dev_bK"
 
@@ -25,10 +30,14 @@ test_run.urlSetup()
 test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
 test_run.portalSignIn(test_run.url)
 
-# Story Customization (TEST)
+# Story Customization (TEST) DONE
 #test_run.customizeCharacter(STORY, "FEMALE", "Female Athletic Body", "Ash01", "Arched Short", "greenMint", 
 #	"Beach Wave Hair", "BluePastel", "Deepset Downturned", "violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", "pinkDeepGloss")
 
-# Outfit Customization (TEST)
+# Outfit Customization (TEST) DONE
 #test_run.removeFromExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
-test_run.addToExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
+#test_run.addToExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
+#test_run.createNewOutfit(STORY, "OUTFIT_NAME", "Plus Female", "Leg Hair Light")
+
+# Copy and Paste Text Into Story Editor (TEST) IN PROGRESS
+test_run.createEpisode(STORY, "text.txt")
