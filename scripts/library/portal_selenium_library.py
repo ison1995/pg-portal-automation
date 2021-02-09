@@ -1,5 +1,6 @@
 # Automation for Portal QA Checklist
 import time
+import pyperclip
 import unittest
 import calendar
 from selenium import webdriver
@@ -329,23 +330,40 @@ class DevChecklist(unittest.TestCase):
 		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
 		outfit_saveButton.click()
 
-	def createEpisode(self, story_id_url, text_filename):
+	def createEpisode(self, story_id_url, textfile_abs_path):
 		# Go to Story Page
 		browser.get(story_id_url)
 
-		# TODO: Create a new Episode 
-		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "episode-button")))
+		# Create a new Episode 
 		new_episodeButton = browser.find_element_by_id("episode-button")
 		new_episodeButton.click()
 
-		# TODO: Copy and Paste the contents of the text file into the Story Editor
-		with open('episode_sample_text.txt') as file:
-    		data = file.read().replace('\n', '')
+		# Copy Contents of Text File
+		with open(textfile_abs_path) as file:
+			data = file.read()
+			pyperclip.copy(data)
 
-    	print data
+		# Define Story Editor
+		story_editor_xpath_locater = "//*[contains(@class, 'ace_layer ace_text-layer')]/div"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "savebtn")))
+		story_editor = browser.find_element_by_xpath(story_editor_xpath_locater)
 
-		# TODO: Save Episode
-		
+		# Clicks into Story Editor
+		ActionChains(browser) \
+			.move_to_element(story_editor) \
+			.click(story_editor) \
+			.perform()
+
+		# Pastes Content into Story Editor
+		ActionChains(browser) \
+			.key_down(Keys.COMMAND) \
+			.send_keys("a") \
+			.send_keys("v") \
+			.perform()
+
+		# Save Episode
+		episode_saveButton = browser.find_element_by_id("savebtn")
+		episode_saveButton.click()
 
 	#def shareGmail():
 
