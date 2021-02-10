@@ -354,7 +354,7 @@ class DevChecklist(unittest.TestCase):
 			.click(story_editor) \
 			.perform()
 
-		# Pastes Content into Story Editor
+		# Pastes Content into Story Editor (MAC ONLY)
 		ActionChains(browser) \
 			.key_down(Keys.COMMAND) \
 			.send_keys("a") \
@@ -365,9 +365,37 @@ class DevChecklist(unittest.TestCase):
 		episode_saveButton = browser.find_element_by_id("savebtn")
 		episode_saveButton.click()
 
-	#def shareGmail():
+	def shareGmail(self, story_id_url, email_toShare):
+		# Go to Story Page
+		browser.get(story_id_url)
 
-	#def publishStory():
+		# Click on the Gmail Icon
+		gmail_shareButton_xpath_locater = "//a[@class='at-icon-wrapper at-share-btn at-svc-gmail']"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, gmail_shareButton_xpath_locater)))
+		gmail_shareButton = browser.find_element_by_xpath(gmail_shareButton_xpath_locater)
+		gmail_shareButton.click()
+
+		# Send to Email
+		gmail_sendButton_xpath_locater = "//div[@id=':oy']"
+		browser.switch_to_window(browser.window_handles[1])
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, gmail_sendButton_xpath_locater)))
+		ActionChains(browser).send_keys(email_toShare).perform()
+		gmail_sendButton = browser.find_element_by_xpath(gmail_sendButton_xpath_locater)
+		gmail_sendButton.click()
+
+		# Refocus on Main Tab
+		browser.switch_to_window(browser.window_handles[0])
+
+	def publishStory(story_id_url):
+		# Go to Story Page
+		browser.get(story_id_url)
+
+		# TODO: Click on Publish Button
+
+		# TODO: Navigate Publish Form
+
+		# TOOD: Publish
+
 
 if __name__ == '__main__':
 	unittest.main()

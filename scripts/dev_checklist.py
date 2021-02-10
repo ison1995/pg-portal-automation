@@ -39,5 +39,17 @@ test_run.portalSignIn(test_run.url)
 #test_run.addToExistingOutfit(STORY, "FEMALE_default", "Rippedleggingssimple Grey Black")
 #test_run.createNewOutfit(STORY, "OUTFIT_NAME", "Plus Female", "Leg Hair Light")
 
-# Copy and Paste Text Into Story Editor (TEST) IN PROGRESS
-test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
+# Copy and Paste Text Into Story Editor (TEST) DONE
+#test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
+
+# Share Story via Gmail (TEST) DONE
+#test_run.shareGmail(STORY, "pocketgemstestiap@gmail.com")
+
+# Publish Story (TEST) IN PROGRESS
+test_run.publishStory(STORY)
+
+
+
+
+
+
