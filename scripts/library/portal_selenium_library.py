@@ -386,15 +386,37 @@ class DevChecklist(unittest.TestCase):
 		# Refocus on Main Tab
 		browser.switch_to_window(browser.window_handles[0])
 
-	def publishStory(story_id_url):
+	def publishStory(self, story_id_url, author_name, story_description, num_episodes):
 		# Go to Story Page
 		browser.get(story_id_url)
 
-		# TODO: Click on Publish Button
+		# Click on Publish Button 
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "submit-button")))
+		publish_button = browser.find_element_by_id("submit-button")
+		publish_button.click()
 
-		# TODO: Navigate Publish Form
+		# Wait for Publish Form 
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "publish-modal-header")))
+		
+		# Input Author Name
+		author_name_xpath_locater = "//div[contains(text(), 'Author Name')]/following-sibling::input"
+		author_name_input = browser.find_element_by_xpath(author_name_xpath_locater)
+		author_name_input.send_keys(author_name)
 
-		# TOOD: Publish
+		# Input Description
+		story_description_input_xpath_locater = "//textarea[@placeholder='Write a brief description of your story']"
+		story_description_input = browser.find_element_by_xpath(story_description_input_xpath_locater)
+		story_description_input.send_keys(story_description)
+
+		# Check the TOS Publishing Box
+		TOS_publishing_box = browser.find_element_by_id("publishing-agree-tos")
+		TOS_publishing_box.click()
+
+		# Publish
+		final_publish_button_xpath_locater = "//button[@ng-click='publishStory()']"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, final_publish_button_xpath_locater)))
+		final_publish_button = browser.find_element_by_xpath(final_publish_button_xpath_locater)
+		final_publish_button.click()
 
 
 if __name__ == '__main__':

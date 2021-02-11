@@ -46,7 +46,7 @@ test_run.portalSignIn(test_run.url)
 #test_run.shareGmail(STORY, "pocketgemstestiap@gmail.com")
 
 # Publish Story (TEST) IN PROGRESS
-test_run.publishStory(STORY)
+test_run.publishStory(STORY, "TEST", "TEST", 3)
 
 
 
