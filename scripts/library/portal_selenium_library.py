@@ -323,12 +323,16 @@ class DevChecklist(unittest.TestCase):
 		outfit_before_hover = browser.find_element_by_xpath("//div[contains(text(), '"+asset_toAdd+"')]")
 		ActionChains(browser).move_to_element(outfit_before_hover).perform()
 		outfit_toAdd = browser.find_element_by_class_name("overlay-image")
-		outfit_toAdd.click()		
+		outfit_toAdd.click()
+		time.sleep(5)	
 
 		# Save Outfit
 		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "outfit-save-button")))
 		outfit_saveButton = browser.find_element_by_id("outfit-save-button")
 		outfit_saveButton.click()
+
+		# Wait for Webpage to finish saving
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.LINK_TEXT, outfit_name)))
 
 	def createEpisode(self, story_id_url, textfile_abs_path):
 		# Go to Story Page
@@ -364,6 +368,10 @@ class DevChecklist(unittest.TestCase):
 		# Save Episode
 		episode_saveButton = browser.find_element_by_id("savebtn")
 		episode_saveButton.click()
+
+		# Wait for Save to Finish
+		savedNotification_xpath_locater = "//span[containsText(), 'Chapter saved.']" 
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, savedNotification_xpath_locater)))
 
 	def shareGmail(self, story_id_url, email_toShare):
 		# Go to Story Page
@@ -417,6 +425,17 @@ class DevChecklist(unittest.TestCase):
 		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, final_publish_button_xpath_locater)))
 		final_publish_button = browser.find_element_by_xpath(final_publish_button_xpath_locater)
 		final_publish_button.click()
+
+	def waitUser(self):
+		user_permission = input("Ready to proceed? y/n")
+		result = False
+
+		if user_permission == "y":
+			result = True
+		else:
+			result = False
+
+		return result
 
 
 if __name__ == '__main__':
