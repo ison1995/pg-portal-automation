@@ -52,7 +52,6 @@ while permission == False:
 	permission = test_run.waitUser()
 	if permission == True:
 		break
-		
 test_run.publishStory(STORY, "TEST_AUTHOR", "TEST_DESCRIPTION", 3)
 
 

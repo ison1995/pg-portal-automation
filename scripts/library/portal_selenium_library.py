@@ -338,6 +338,15 @@ class DevChecklist(unittest.TestCase):
 		# Go to Story Page
 		browser.get(story_id_url)
 
+		# Check for the Survey Pop Up
+		try:
+			survey_close_button_xpath_locater = "//div[@class='smcx-modal-close']"
+			WebDriverWait(browser, 5).until(EC.element_to_be_clickable((By.XPATH, survey_close_button_xpath_locater)))
+			survey_close_button = browser.find_element_by_xpath(survey_close_button_xpath_locater)
+			survey_close_button.click()
+		except:
+			print("Survey not found. Continuing.")
+
 		# Create a new Episode 
 		new_episodeButton = browser.find_element_by_id("episode-button")
 		new_episodeButton.click()
@@ -366,12 +375,25 @@ class DevChecklist(unittest.TestCase):
 			.perform()
 
 		# Save Episode
-		episode_saveButton = browser.find_element_by_id("savebtn")
-		episode_saveButton.click()
+		chapter_preview_button_xpath_locater = "//a[contains(text(), 'Save And Preview')]"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, chapter_preview_button_xpath_locater)))
+		
+		ActionChains(browser) \
+		.key_down(Keys.COMMAND) \
+		.send_keys("s") \
+		.perform()
 
 		# Wait for Save to Finish
-		savedNotification_xpath_locater = "//span[containsText(), 'Chapter saved.']" 
+		savedNotification_xpath_locater = "//span[contains(text(), 'Chapter saved.')]"
 		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, savedNotification_xpath_locater)))
+
+	def closeSurvey(self):
+		try:
+			WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, "smcx-modal-close")))
+			survey_close_button = browser.find_element_by_class_name("smxc-modal-close")
+			survey_close_button.click()
+		except:
+			print("Survey not found. Continuing.")
 
 	def shareGmail(self, story_id_url, email_toShare):
 		# Go to Story Page
@@ -387,6 +409,7 @@ class DevChecklist(unittest.TestCase):
 		gmail_sendButton_xpath_locater = "//div[@id=':oy']"
 		browser.switch_to_window(browser.window_handles[1])
 		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, gmail_sendButton_xpath_locater)))
+		time.sleep(3)
 		ActionChains(browser).send_keys(email_toShare).perform()
 		gmail_sendButton = browser.find_element_by_xpath(gmail_sendButton_xpath_locater)
 		gmail_sendButton.click()
@@ -427,7 +450,7 @@ class DevChecklist(unittest.TestCase):
 		final_publish_button.click()
 
 	def waitUser(self):
-		user_permission = input("Ready to proceed? y/n")
+		user_permission = input("Ready to proceed? y/n ")
 		result = False
 
 		if user_permission == "y":
