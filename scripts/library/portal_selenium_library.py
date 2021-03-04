@@ -404,13 +404,17 @@ class DevChecklist(unittest.TestCase):
 		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, gmail_shareButton_xpath_locater)))
 		gmail_shareButton = browser.find_element_by_xpath(gmail_shareButton_xpath_locater)
 		gmail_shareButton.click()
+		time.sleep(1)
 
-		# Send to Email
-		gmail_sendButton_xpath_locater = "//div[@id=':oy']"
+		# Insert Email into recipients 
 		browser.switch_to_window(browser.window_handles[1])
-		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, gmail_sendButton_xpath_locater)))
-		time.sleep(3)
-		ActionChains(browser).send_keys(email_toShare).perform()
+		gmail_recipient_input_xpath_locater = "//textarea[@id=':o6']"
+		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.XPATH, gmail_recipient_input_xpath_locater)))
+		gmail_recipient_input = browser.find_element_by_xpath(gmail_recipient_input_xpath_locater)
+		gmail_recipient_input.send_keys(email_toShare)
+
+		# Press the Send button
+		gmail_sendButton_xpath_locater = "//div[@id=':oy']"
 		gmail_sendButton = browser.find_element_by_xpath(gmail_sendButton_xpath_locater)
 		gmail_sendButton.click()
 
@@ -425,17 +429,17 @@ class DevChecklist(unittest.TestCase):
 		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.ID, "submit-button")))
 		publish_button = browser.find_element_by_id("submit-button")
 		publish_button.click()
-
-		# Wait for Publish Form 
-		WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, "publish-modal-header")))
 		
 		# Input Author Name
 		author_name_xpath_locater = "//div[contains(text(), 'Author Name')]/following-sibling::input"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, author_name_xpath_locater)))
+		time.sleep(1)
 		author_name_input = browser.find_element_by_xpath(author_name_xpath_locater)
 		author_name_input.send_keys(author_name)
 
 		# Input Description
 		story_description_input_xpath_locater = "//textarea[@placeholder='Write a brief description of your story']"
+		WebDriverWait(browser, 30).until(EC.element_to_be_clickable((By.XPATH, story_description_input_xpath_locater)))
 		story_description_input = browser.find_element_by_xpath(story_description_input_xpath_locater)
 		story_description_input.send_keys(story_description)
 
