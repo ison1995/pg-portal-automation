@@ -1,58 +1,58 @@
-from library.portal_selenium_library import DevChecklist
+from selenium_library.portal_selenium_library import DevLibrary
 
 # Dev Checklist 
 
 # Setup
-test_run = DevChecklist()
-test_run.urlSetup()
+dev_test_run = DevLibrary()
+dev_test_run.urlSetup()
 
 # Sign In
-test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
-test_run.portalSignIn(test_run.url)
-test_run.portalNewWriterTOS(test_run.url)
+dev_test_run.googleSignIn("episodeisaacqa@gmail.com", "Tapfarm1")
+dev_test_run.portalSignIn(dev_test_run.url)
+dev_test_run.portalNewWriterTOS(dev_test_run.url)
 
 # Story Create -- Creates the story URL to use for the rest of the testing run
-STORY = test_run.createNewStory(test_run.url, test_run.user_input_version)
+STORY = dev_test_run.createNewStory(dev_test_run.url, dev_test_run.user_input_version)
 
 # Character Create -- Creates the test characters
-test_run.test_characterCreate(STORY, "PEARL", "FEMALE", True)
-test_run.test_characterCreate(STORY, "CHARLIE", "MALE", False)
-test_run.test_characterCreate(STORY, "RENEE", "FEMALEPLUS", False)
+dev_test_run.characterCreate(STORY, "PEARL", "FEMALE", True)
+dev_test_run.characterCreate(STORY, "CHARLIE", "MALE", False)
+dev_test_run.characterCreate(STORY, "RENEE", "FEMALEPLUS", False)
 
 # Character Customization -- Customizes each character 
-test_run.customizeCharacter(STORY, "FEMALE", "Female Generic Body", "Ash01", "Arched Short", 
+dev_test_run.customizeCharacter(STORY, "FEMALE", "Female Generic Body", "Ash01", "Arched Short", 
 							"greenMint", "Beach Wave Hair", "BluePastel", "Deepset Downturned", 
 							"violet", "Diamond Long", "Defined Natural", "Full Heart Pouty", 
 							"pinkDeepGloss")
-test_run.customizeCharacter(STORY, "MALE", "Male Generic Body", "BeigeNeutral2", "Arched Medium", 
+dev_test_run.customizeCharacter(STORY, "MALE", "Male Generic Body", "BeigeNeutral2", "Arched Medium", 
 							"BlondeHoney", "Conservative Cut", "BrownMedium", "Deepset Heavy Lid",
 							"hazel", "Chiseled Angular", "Button Wide", "Full Heart Natural",
 							"brownNeutral")
-test_run.customizeCharacter(STORY, "FEMALEPLUS", "Female Plus Skin", "BeigeGold", "Arched Thick Styled",
+dev_test_run.customizeCharacter(STORY, "FEMALEPLUS", "Female Plus Skin", "BeigeGold", "Arched Thick Styled",
 							"WhiteWarm", "Layered Wavy Bob", "BlondeAsh", "Deepset Almond", 
 							"red", "Heart Defined", "Grecian Soft", "Full Wide",
 							"orangeBloodMatte")
 
 # Outfit Create -- Creates new outfits for each character to change into
-test_run.createNewOutfit(STORY, "FEMALE_Outfit", "Generic Female", "Turtleneck Sweater And High Waisted Pants Cotton White")
-test_run.createNewOutfit(STORY, "MALE_Outfit", "Generic Male", "One Piece Suit Jacket Cotton Blue Purple")
-test_run.createNewOutfit(STORY, "FEMALEPLUS_Outfit", "Plus Female", "Button Up Denim Dress T Shirt Layered Denim Blue White")
+dev_test_run.createNewOutfit(STORY, "FEMALE_Outfit", "Generic Female", "Turtleneck Sweater And High Waisted Pants Cotton White")
+dev_test_run.createNewOutfit(STORY, "MALE_Outfit", "Generic Male", "One Piece Suit Jacket Cotton Blue Purple")
+dev_test_run.createNewOutfit(STORY, "FEMALEPLUS_Outfit", "Plus Female", "Button Up Denim Dress T Shirt Layered Denim Blue White")
 
 # Chapter Creation
-test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
-test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
-test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
+dev_test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
+dev_test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
+dev_test_run.createEpisode(STORY, "/Users/isaacson/Downloads/Repos/pg-portal-automation/scripts/library/episode_sample_text.txt")
 
 # Story Sharing
-test_run.shareGmail(STORY, "pocketgemstestiap@gmail.com")
+dev_test_run.shareGmail(STORY, "pocketgemstestiap@gmail.com")
 
 # Story Publishing
 permission = False
 while permission == False:
-	permission = test_run.waitUser()
+	permission = dev_test_run.waitUser()
 	if permission == True:
 		break
-test_run.publishStory(STORY, "TEST_AUTHOR", "TEST_DESCRIPTION", 3)
+dev_test_run.publishStory(STORY, "TEST_AUTHOR", "TEST_DESCRIPTION", 3)
 
 
 
